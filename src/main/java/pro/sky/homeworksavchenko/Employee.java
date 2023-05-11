@@ -34,7 +34,7 @@ public class Employee {
 
     @Override
     public String toString() {
-        return "Имя: " + firstName + "\nФамилия: " + lastName;
+        return "Имя: " + firstName + "<br>Фамилия: " + lastName;
     }
 
 }
