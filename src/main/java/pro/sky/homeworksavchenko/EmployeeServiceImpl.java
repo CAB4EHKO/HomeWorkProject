@@ -6,51 +6,59 @@ import exceptions.EmployeeStorageIsFullException;
 import interfaces.EmployeeService;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 
 @Service
 
 public class EmployeeServiceImpl implements EmployeeService {
 
-    List<Employee> employeeList = new ArrayList<>();
+    Map<String, Employee> employeeMap = new HashMap<>();
     private static final int MAX_EMPLOYEES = 5;
 
     @Override
     public String addEmployee(String firstName, String lastName) {
         Employee employee = new Employee(firstName, lastName);
-        if (employeeList.contains(employee)) {
+        if (employeeMap.containsKey(firstName + " " + lastName)) {
             throw new EmployeeAlreadyAddedException("<p style=\"color:red;\">EMPLOYEE_ALREADY_EXIST<p>");
-        } else if (employeeList.size() >= MAX_EMPLOYEES) {
+        } else if (employeeMap.size() >= MAX_EMPLOYEES) {
             throw new EmployeeStorageIsFullException("<p style=\"color:red;\">NUMBER_OF_EMPLOYEES_EXCEEDED<p>");
         }
-        employeeList.add(employee);
+        employeeMap.put(firstName + " " + lastName, employee);
         return employee.toString() + "<p style=\"color:green;\">Добавлен в список сотрудников.<p>";
     }
+
 
     @Override
     public String removeEmployee(String firstName, String lastName) {
         Employee employee = new Employee(firstName, lastName);
-        if (!employeeList.contains(employee)) {
+        if (!employeeMap.containsKey(firstName + " " + lastName)) {
             throw new EmployeeNotFoundException("<p style=\"color:red;\">EMPLOYEE_NOT_FOUND<p>");
         }
-        employeeList.remove(employee);
+        employeeMap.remove(firstName + " " + lastName, employee);
         return employee.toString() + "<p style=\"color:red;\">Удалён из списка сотрудников.<p>";
     }
 
-    @Override
-    public String listEmployees() {
-        return employeeList.toString();
-    }
+
     @Override
     public String findEmployee(String firstName, String lastName) {
         Employee employee = new Employee(firstName, lastName);
-        if (!employeeList.contains(employee)) {
+        if (!employeeMap.containsKey(firstName + " " + lastName)) {
             throw new EmployeeNotFoundException("<p style=\"color:red;\">EMPLOYEE_NOT_FOUND<p>");
         }
         return employee.toString();
     }
+
+    @Override
+    public String listEmployees() {
+        StringBuilder sb = new StringBuilder();
+        for (Employee employee : employeeMap.values()) {
+            sb.append(employee.toString()).append(System.lineSeparator());
+        }
+        return sb.toString();
+    }
+
 
 }
 
