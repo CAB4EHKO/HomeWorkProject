@@ -3,9 +3,11 @@ package pro.sky.homeworksavchenko;
 import exceptions.EmployeeAlreadyAddedException;
 import exceptions.EmployeeNotFoundException;
 import exceptions.EmployeeStorageIsFullException;
-import interfaces.EmployeeService;
+import service.EmployeeService;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -15,11 +17,11 @@ import java.util.Map;
 public class EmployeeServiceImpl implements EmployeeService {
 
     Map<String, Employee> employeeMap = new HashMap<>();
-    private static final int MAX_EMPLOYEES = 5;
+    private static final int MAX_EMPLOYEES = 15;
 
     @Override
-    public String addEmployee(String firstName, String lastName) {
-        Employee employee = new Employee(firstName, lastName);
+    public String addEmployee(String firstName, String lastName, Integer salary, Integer department) {
+        Employee employee = new Employee(firstName, lastName, salary, department);
         if (employeeMap.containsKey(firstName + " " + lastName)) {
             throw new EmployeeAlreadyAddedException("<p style=\"color:red;\">EMPLOYEE_ALREADY_EXIST<p>");
         } else if (employeeMap.size() >= MAX_EMPLOYEES) {
@@ -51,12 +53,9 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public String listEmployees() {
-        StringBuilder sb = new StringBuilder();
-        for (Employee employee : employeeMap.values()) {
-            sb.append(employee.toString()).append(System.lineSeparator());
-        }
-        return sb.toString();
+    public Collection<Employee> listEmployees() {
+
+        return Collections.unmodifiableCollection(employeeMap.values());
     }
 
 

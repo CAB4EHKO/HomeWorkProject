@@ -5,6 +5,23 @@ import java.util.Objects;
 public class Employee {
     private String firstName;
     private String lastName;
+    private int salary;
+    private int department;
+
+    public Employee(String firstName, String lastName, int salary, int department) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.salary = salary;
+        this.department = department;
+    }
+
+    public int getSalary() {
+        return salary;
+    }
+
+    public int getDepartment() {
+        return department;
+    }
 
     public Employee(String firstName, String lastName) {
         this.firstName = firstName;
@@ -34,7 +51,7 @@ public class Employee {
 
     @Override
     public String toString() {
-        return "<br>Имя: " + firstName + " Фамилия: " + lastName;
+        return "<br>Имя: " + firstName + " Фамилия: " + lastName + "<br>Зарплата: " + salary + " Отдел: " + department;
     }
 
 }

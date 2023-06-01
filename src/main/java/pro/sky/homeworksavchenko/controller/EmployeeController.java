@@ -1,13 +1,16 @@
-package pro.sky.homeworksavchenko;
+package pro.sky.homeworksavchenko.controller;
 
 import exceptions.EmployeeAlreadyAddedException;
 import exceptions.EmployeeNotFoundException;
 import exceptions.EmployeeStorageIsFullException;
-import interfaces.EmployeeService;
+import pro.sky.homeworksavchenko.Employee;
+import service.EmployeeService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Collection;
 
 @RestController
 @RequestMapping("/employee")
@@ -21,9 +24,11 @@ public class EmployeeController {
 
     @GetMapping("/add")
     public String addEmployee(@RequestParam("firstName") String firstName,
-                              @RequestParam("lastName") String lastName) {
+                              @RequestParam("lastName") String lastName,
+                              @RequestParam("salary") Integer salary,
+                              @RequestParam("department") Integer department) {
         try {
-            return employeeService.addEmployee(firstName, lastName);
+            return employeeService.addEmployee(firstName, lastName, salary, department);
         } catch (EmployeeAlreadyAddedException e) {
             System.out.println("Произошла ошибка при добавлении сотрудника: EMPLOYEE_ALREADY_EXIST");
             return e.getMessage();
@@ -56,7 +61,7 @@ public class EmployeeController {
     }
 
     @GetMapping("/list")
-    public String listEmployees() {
+    public Collection<Employee> listEmployees() {
         return employeeService.listEmployees();
     }
 }
