@@ -3,6 +3,7 @@ package pro.sky.homeworksavchenko.controller;
 import exceptions.EmployeeAlreadyAddedException;
 import exceptions.EmployeeNotFoundException;
 import exceptions.EmployeeStorageIsFullException;
+import exceptions.UnexpectedCharacterException;
 import pro.sky.homeworksavchenko.Employee;
 import service.EmployeeService;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,6 +35,8 @@ public class EmployeeController {
             return e.getMessage();
         } catch (EmployeeStorageIsFullException e) {
             System.out.println("Произошла ошибка при добавлении сотрудника: NUMBER_OF_EMPLOYEES_EXCEEDED");
+            return e.getMessage();
+        } catch (UnexpectedCharacterException e) {
             return e.getMessage();
         }
     }

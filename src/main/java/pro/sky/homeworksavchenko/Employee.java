@@ -2,6 +2,9 @@ package pro.sky.homeworksavchenko;
 
 import java.util.Objects;
 
+import static org.apache.commons.lang3.StringUtils.capitalize;
+
+
 public class Employee {
     private String firstName;
     private String lastName;
@@ -9,8 +12,8 @@ public class Employee {
     private int department;
 
     public Employee(String firstName, String lastName, int salary, int department) {
-        this.firstName = firstName;
-        this.lastName = lastName;
+        this.firstName = capitalize(firstName.toLowerCase());
+        this.lastName = capitalize(lastName.toLowerCase());
         this.salary = salary;
         this.department = department;
     }
@@ -34,6 +37,10 @@ public class Employee {
 
     public String getLastName() {
         return lastName;
+    }
+
+    public String checkFullName() {
+        return firstName + " " + lastName;
     }
 
     @Override
