@@ -1,7 +1,7 @@
-package service;
+package pro.sky.homeworksavchenko.service;
 
 import org.springframework.stereotype.Service;
-import pro.sky.homeworksavchenko.Employee;
+import pro.sky.homeworksavchenko.entity.Employee;
 
 import java.util.Collection;
 

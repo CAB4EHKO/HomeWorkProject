@@ -1,11 +1,11 @@
-package pro.sky.homeworksavchenko;
+package pro.sky.homeworksavchenko.service;
 
-import exceptions.EmployeeAlreadyAddedException;
-import exceptions.EmployeeNotFoundException;
-import exceptions.EmployeeStorageIsFullException;
-import exceptions.UnexpectedCharacterException;
+import pro.sky.homeworksavchenko.entity.Employee;
+import pro.sky.homeworksavchenko.exceptions.EmployeeAlreadyAddedException;
+import pro.sky.homeworksavchenko.exceptions.EmployeeNotFoundException;
+import pro.sky.homeworksavchenko.exceptions.EmployeeStorageIsFullException;
+import pro.sky.homeworksavchenko.exceptions.UnexpectedCharacterException;
 import org.apache.commons.lang3.StringUtils;
-import service.EmployeeService;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;

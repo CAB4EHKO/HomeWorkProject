@@ -1,11 +1,11 @@
 package pro.sky.homeworksavchenko.controller;
 
-import exceptions.EmployeeAlreadyAddedException;
-import exceptions.EmployeeNotFoundException;
-import exceptions.EmployeeStorageIsFullException;
-import exceptions.UnexpectedCharacterException;
-import pro.sky.homeworksavchenko.Employee;
-import service.EmployeeService;
+import pro.sky.homeworksavchenko.exceptions.EmployeeAlreadyAddedException;
+import pro.sky.homeworksavchenko.exceptions.EmployeeNotFoundException;
+import pro.sky.homeworksavchenko.exceptions.EmployeeStorageIsFullException;
+import pro.sky.homeworksavchenko.exceptions.UnexpectedCharacterException;
+import pro.sky.homeworksavchenko.entity.Employee;
+import pro.sky.homeworksavchenko.service.EmployeeService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;

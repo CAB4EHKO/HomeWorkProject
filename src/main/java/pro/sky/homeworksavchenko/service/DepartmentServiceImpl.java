@@ -1,8 +1,7 @@
-package pro.sky.homeworksavchenko;
+package pro.sky.homeworksavchenko.service;
 
 import org.springframework.stereotype.Service;
-import service.DepartmentService;
-import service.EmployeeService;
+import pro.sky.homeworksavchenko.entity.Employee;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -15,18 +14,21 @@ public class DepartmentServiceImpl implements DepartmentService {
     public DepartmentServiceImpl(EmployeeService employeeService) {
         this.employeeService = employeeService;
     }
+
     @Override
     public Optional<Employee> getMaxSalaryEmployee(Integer departmentID) {
         return employeeService.listEmployees().stream()
                 .filter(e -> e.getDepartment() == departmentID)
                 .max(Comparator.comparingInt(Employee::getSalary));
     }
+
     @Override
     public Optional<Employee> getMinSalaryEmployee(Integer departmentID) {
         return employeeService.listEmployees().stream()
                 .filter(e -> e.getDepartment() == departmentID)
                 .min(Comparator.comparingInt(Employee::getSalary));
     }
+
     @Override
     public List<Employee> getEmployeeByDepartment(Integer departmentID) {
         return employeeService.listEmployees().stream()
@@ -44,4 +46,27 @@ public class DepartmentServiceImpl implements DepartmentService {
         return departmentMap;
     }
 
+    @Override
+    public Integer getSumSalaryDepartment(Integer id) {
+        return employeeService.listEmployees().stream()
+                .filter(e -> e.getDepartment() == id)
+                .mapToInt(Employee::getSalary)
+                .sum();
+    }
+
+    @Override
+    public OptionalInt getMinSalaryDepartment(Integer id) {
+        return employeeService.listEmployees().stream()
+                .filter(e -> e.getDepartment() == id)
+                .mapToInt(Employee::getSalary)
+                .min();
+    }
+
+    @Override
+    public OptionalInt getMaxSalaryDepartment(Integer id) {
+        return employeeService.listEmployees().stream()
+                .filter(e -> e.getDepartment() == id)
+                .mapToInt(Employee::getSalary)
+                .max();
+    }
 }
