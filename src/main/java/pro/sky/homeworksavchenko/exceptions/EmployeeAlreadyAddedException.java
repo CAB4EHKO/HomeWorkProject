@@ -1,4 +1,4 @@
-package exceptions;
+package pro.sky.homeworksavchenko.exceptions;
 
 public class EmployeeAlreadyAddedException extends RuntimeException {
     public EmployeeAlreadyAddedException(String message) {

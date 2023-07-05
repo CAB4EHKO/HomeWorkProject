@@ -1,11 +1,12 @@
-package service;
+package pro.sky.homeworksavchenko.service;
 
 import org.springframework.stereotype.Service;
-import pro.sky.homeworksavchenko.Employee;
+import pro.sky.homeworksavchenko.entity.Employee;
 
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.OptionalInt;
 
 @Service
 public interface DepartmentService {
@@ -17,5 +18,12 @@ public interface DepartmentService {
 
     List<Employee> getEmployeeByDepartment(Integer department);
 
-    Map<Integer, List<Employee>> getAllEmployees();
+
+    Map<Integer, List<Employee>> getAllEmployeesByDepartment();
+
+    Integer getSumSalaryDepartment(Integer id);
+
+    OptionalInt getMinSalaryDepartment(Integer id);
+
+    OptionalInt getMaxSalaryDepartment(Integer id);
 }

@@ -1,4 +1,4 @@
-package pro.sky.homeworksavchenko;
+package pro.sky.homeworksavchenko.entity;
 
 import java.util.Objects;
 

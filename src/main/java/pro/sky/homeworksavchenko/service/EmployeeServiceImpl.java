@@ -1,11 +1,11 @@
-package pro.sky.homeworksavchenko;
+package pro.sky.homeworksavchenko.service;
 
-import exceptions.EmployeeAlreadyAddedException;
-import exceptions.EmployeeNotFoundException;
-import exceptions.EmployeeStorageIsFullException;
-import exceptions.UnexpectedCharacterException;
+import pro.sky.homeworksavchenko.entity.Employee;
+import pro.sky.homeworksavchenko.exceptions.EmployeeAlreadyAddedException;
+import pro.sky.homeworksavchenko.exceptions.EmployeeNotFoundException;
+import pro.sky.homeworksavchenko.exceptions.EmployeeStorageIsFullException;
+import pro.sky.homeworksavchenko.exceptions.UnexpectedCharacterException;
 import org.apache.commons.lang3.StringUtils;
-import service.EmployeeService;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
@@ -17,11 +17,16 @@ import java.util.Map;
 
 public class EmployeeServiceImpl implements EmployeeService {
 
-    Map<String, Employee> employeeMap = new HashMap<>();
-    private static final int MAX_EMPLOYEES = 15;
+    Map<String, Employee> employeeMap;
+    static final int MAX_EMPLOYEES = 15;
+
+    public EmployeeServiceImpl() {
+        this.employeeMap = new HashMap<>();
+    }
+
 
     @Override
-    public String addEmployee(String firstName, String lastName, Integer salary, Integer department) {
+    public Employee addEmployee(String firstName, String lastName, Integer salary, Integer department) {
         Employee employee = new Employee(firstName, lastName, salary, department);
         validateInputDate(employee.getFirstName(), employee.getLastName());
         if (employeeMap.containsKey(employee.checkFullName())) {
@@ -30,30 +35,30 @@ public class EmployeeServiceImpl implements EmployeeService {
             throw new EmployeeStorageIsFullException("<p style=\"color:red;\">NUMBER_OF_EMPLOYEES_EXCEEDED<p>");
         }
         employeeMap.put(employee.checkFullName(), employee);
-        return employee.toString() + "<p style=\"color:green;\">Добавлен в список сотрудников.<p>";
+        return employee;
     }
 
 
     @Override
-    public String removeEmployee(String firstName, String lastName) {
+    public Employee removeEmployee(String firstName, String lastName) {
         Employee employee = new Employee(firstName, lastName);
         validateInputDate(employee.getFirstName(), employee.getLastName());
         if (!employeeMap.containsKey(employee.checkFullName())) {
             throw new EmployeeNotFoundException("<p style=\"color:red;\">EMPLOYEE_NOT_FOUND<p>");
         }
         employeeMap.remove(employee.checkFullName(), employee);
-        return employee.toString() + "<p style=\"color:red;\">Удалён из списка сотрудников.<p>";
+        return employee;
     }
 
 
     @Override
-    public String findEmployee(String firstName, String lastName) {
+    public Employee findEmployee(String firstName, String lastName) {
         Employee employee = new Employee(firstName, lastName);
         validateInputDate(employee.getFirstName(), employee.getLastName());
         if (!employeeMap.containsKey(employee.checkFullName())) {
             throw new EmployeeNotFoundException("<p style=\"color:red;\">EMPLOYEE_NOT_FOUND<p>");
         }
-        return employee.toString();
+        return employee;
     }
 
     @Override
