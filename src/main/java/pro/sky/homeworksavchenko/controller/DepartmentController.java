@@ -36,7 +36,7 @@ public class DepartmentController {
 
     @GetMapping(path = "/all")
     public Map<Integer, List<Employee>> getAllEmployees() {
-        return departmentService.getAllEmployees();
+        return departmentService.getAllEmployeesByDepartment();
     }
 
     @GetMapping("/{id}/salary/sum")

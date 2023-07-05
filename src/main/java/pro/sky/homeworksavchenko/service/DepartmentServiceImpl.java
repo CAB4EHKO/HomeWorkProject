@@ -37,13 +37,10 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
 
     @Override
-    public Map<Integer, List<Employee>> getAllEmployees() {
-        Collection<Employee> allEmployees = employeeService.listEmployees();
+    public Map<Integer, List<Employee>> getAllEmployeesByDepartment() {
 
-        Map<Integer, List<Employee>> departmentMap = allEmployees.stream()
-                .collect(Collectors.groupingBy(Employee::getDepartment, Collectors.toList()));
-
-        return departmentMap;
+        return employeeService.listEmployees().stream()
+                .collect(Collectors.groupingBy(Employee::getDepartment));
     }
 
     @Override
